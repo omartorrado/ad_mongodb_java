@@ -9,6 +9,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
@@ -24,6 +25,7 @@ public class Ad_mongodb_java {
     
     public static void main(String[] args) {
         conectar();
+        
     }
     
     public static void conectar(){
@@ -37,6 +39,18 @@ public class Ad_mongodb_java {
         BasicDBObject condicion= new BasicDBObject("kind","essay");
         //Creamos un cursor
         FindIterable<Document> cursor1=coleccion.find(condicion);
+        //Creamos un objeto MongoCursor que será el que iteremos
+        MongoCursor<Document> iterar=cursor1.iterator();
+        while(iterar.hasNext()){
+            Document doc=iterar.next();
+            String kind = doc.getString("kind");
+            double score = doc.getDouble("score");
+            double student = doc.getDouble("student");
+            
+            System.out.println(kind+","+score+","+student);
+        }
+        iterar.close();
+        cliente.close();
     }
     
 }
