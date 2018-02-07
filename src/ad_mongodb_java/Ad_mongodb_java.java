@@ -25,7 +25,8 @@ public class Ad_mongodb_java {
         MongoHandler mongo=new MongoHandler();
         mongo.conectar();
         //mongo.insertar();
-        mongo.modificar();
+        //mongo.modificar();
+        mongo.mostrar();
     }
     
     
